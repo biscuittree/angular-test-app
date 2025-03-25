@@ -1,0 +1,5 @@
+<div class="toast-container" ng-if="$ctrl.toasts.length > 0">
+  <div class="toast" ng-repeat="toast in $ctrl.toasts" ng-class="'toast__' + toast.type">
+    {{ toast.message }}
+  </div>
+</div>

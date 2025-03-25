@@ -1,0 +1,84 @@
+<form name="userForm" novalidate>
+  <div class="field">
+    <label>Username*</label>
+    <input type="text" name="username" ng-model="$ctrl.user.username"
+      user-id="$ctrl.user.id"
+      ng-class="{'error': ($ctrl.isSubmitted || userForm.username.$touched) && (userForm.username.$error.required || userForm.username.$error.uniqueUsername)}"
+      validate-user required>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.username.$touched) && userForm.username.$error.required">Username is
+      required. </span>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.username.$touched) && userForm.username.$error.uniqueUsername">Username
+      already exists.</span>
+  </div>
+  <div class="field">
+    <label>First Name*</label>
+    <input type="text" name="firstName" ng-model="$ctrl.user.firstName"
+      ng-class="{'error': ($ctrl.isSubmitted || userForm.firstName.$touched) && userForm.firstName.$error.required}"
+      required>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.firstName.$touched) && userForm.firstName.$error.required">First name is
+      required.</span>
+  </div>
+  <div class="field">
+    <label>Last Name*</label>
+    <input type="text" name="lastName" ng-model="$ctrl.user.lastName"
+      ng-class="{'error': ($ctrl.isSubmitted || userForm.lastName.$touched) && userForm.lastName.$error.required}"
+      required>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.lastName.$touched) && userForm.lastName.$error.required">Last name is
+      required.</span>
+  </div>
+  <div class="field">
+    <label>Email*</label>
+    <input type="email" name="email" ng-model="$ctrl.user.email"
+      ng-class="{'error': ($ctrl.isSubmitted || userForm.email.$touched) && (userForm.email.$error.required || userForm.email.$error.validEmail)}"
+      validate-user required>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.email.$touched) && userForm.email.$error.required">Email is
+      required.</span>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.email.$touched) && userForm.email.$error.validEmail">Invalid email
+      format.</span>
+  </div>
+  <div class="field">
+    <label>Type*</label>
+    <select name="userTypes" ng-model="$ctrl.user.type"
+      ng-class="{'error': ($ctrl.isSubmitted || userForm.userTypes.$touched) && userForm.userTypes.$error.required}"
+      required>
+      <option ng-repeat="type in $ctrl.userTypes" value="{{ type }}">{{ type }}</option>
+    </select>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.userTypes.$touched) && userForm.userTypes.$error.required">Type is
+      required.</span>
+  </div>
+  <div class="field">
+    <label>Password*</label>
+    <input name="password" type="password" ng-model="$ctrl.user.password"
+      ng-class="{'error': ($ctrl.isSubmitted || userForm.password.$touched) && (userForm.password.$error.required || userForm.password.$error.strongPassword)}"
+      validate-user required>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.password.$touched) && userForm.password.$error.required">Password is
+      required. </span>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.password.$touched) && userForm.password.$error.strongPassword">
+      Password must be at least 8 characters, with at least one letter and one number.
+    </span>
+  </div>
+  <div class="field">
+    <label>Repeat password*</label>
+    <input name="repeatPassword" type="password" ng-model="$ctrl.user.repeatPassword" validate-user
+      match-with="$ctrl.user.password" required>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.repeatPassword.$touched) && userForm.repeatPassword.$error.required">
+      Password is required. </span>
+    <span class="field__error"
+      ng-show="($ctrl.isSubmitted || userForm.repeatPassword.$touched) && userForm.repeatPassword.$error.matchPassword">Passwords do not match.</span>
+  </div>
+  <div class="form-actions" ng-class="{'form-actions__create': !$ctrl.user.id}">
+    <button type="button" ng-if="$ctrl.user.id" class="button button__danger"
+      ng-click="$ctrl.onDelete()">Delete</button>
+    <button type="button" class="button button__primary" ng-click="$ctrl.onSubmit()">Save</button>
+  </div>
+</form>
